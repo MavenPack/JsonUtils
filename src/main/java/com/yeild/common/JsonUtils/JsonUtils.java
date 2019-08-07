@@ -3,7 +3,9 @@ package com.yeild.common.JsonUtils;
 import java.io.IOException;
 
 import org.apache.log4j.Logger;
+import org.apache.log4j.spi.LoggerFactory;
 
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,12 +17,13 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.yeild.common.Utils.CommonUtils;
 
 public class JsonUtils {
-	private static Logger logger = Logger.getLogger(JsonUtils.class.getSimpleName());
+	private static Logger logger = Logger.getLogger(JsonUtils.class);
 
     public static String objToJson(Object obj) {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
+    		mapper.setSerializationInclusion(Include.NON_DEFAULT);
             return mapper.writeValueAsString(obj);
         } catch (JsonProcessingException e) {
 			logger.debug(CommonUtils.getExceptionInfo(e));
@@ -81,5 +84,15 @@ public class JsonUtils {
 
     public static JavaType getCollectionJsonType(Class<?> collectionClass, Class<?>... elementClass) {
         return new ObjectMapper().getTypeFactory().constructParametricType(collectionClass, elementClass);
+    }
+
+    public static <T> T castTo(Object source, Class<?> collectionClass, Class<?>... elementClass) {
+        ObjectMapper mapper = new ObjectMapper();
+        return mapper.convertValue(source, getCollectionJsonType(collectionClass, elementClass));
+    }
+    
+    public static <T> T castTo(Object source, Class<T> destination) {
+    	ObjectMapper mapper = new ObjectMapper();
+    	return mapper.convertValue(source, destination);
     }
 }
