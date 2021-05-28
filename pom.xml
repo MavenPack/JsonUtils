@@ -4,7 +4,7 @@
 
 	<groupId>com.yeild.common</groupId>
 	<artifactId>JsonUtils</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>${version}${version.snap}</version>
 	<packaging>jar</packaging>
 
 	<name>JsonUtils</name>
@@ -12,9 +12,12 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<version>2.0.1</version>
+		<version.snap>-SNAPSHOT</version.snap>
 		<jdk.version>1.8</jdk.version>
 		<jdk.classifier></jdk.classifier>
 		<jackson.version>2.8.6</jackson.version>
+  		<log4j.version>2.14.1</log4j.version>
 	</properties>
 
 	<profiles>
@@ -32,16 +35,16 @@
 		<profile>
 			<id>jdk16</id>
 			<properties>
+				<version>0.0.1</version>
 				<jdk.version>1.6</jdk.version>
-				<jdk.classifier>${jdk.version}</jdk.classifier>
 				<jackson.version>2.7.9</jackson.version>
 			</properties>
 		</profile>
 		<profile>
 			<id>jdk17</id>
 			<properties>
+				<version>1.0.1</version>
 				<jdk.version>1.7</jdk.version>
-				<jdk.classifier>${jdk.version}</jdk.classifier>
 			</properties>
 		</profile>
 	</profiles>
@@ -55,15 +58,15 @@
 
 	<dependencies>
 		<dependency>
-		    <groupId>com.github.MavenPack</groupId>
+		    <groupId>com.yeild.common</groupId>
 		    <artifactId>Utils</artifactId>
-		    <version>0.1</version>
+		    <version>${version}${version.snap}</version>
 		</dependency>
-		<dependency>
-			<groupId>log4j</groupId>
-			<artifactId>log4j</artifactId>
-			<version>1.2.17</version>
-		</dependency>
+	    <dependency>
+	        <groupId>org.apache.logging.log4j</groupId>
+        	<artifactId>log4j-api</artifactId>
+	        <version>${log4j.version}</version>
+	    </dependency>
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>

@@ -2,8 +2,8 @@ package com.yeild.common.JsonUtils;
 
 import java.io.IOException;
 
-import org.apache.log4j.Logger;
-import org.apache.log4j.spi.LoggerFactory;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.core.JsonParseException;
@@ -17,7 +17,7 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import com.yeild.common.Utils.CommonUtils;
 
 public class JsonUtils {
-	private static Logger logger = Logger.getLogger(JsonUtils.class);
+	private static Logger logger = LogManager.getLogger(JsonUtils.class);
 
     public static String objToJson(Object obj) {
         try {
